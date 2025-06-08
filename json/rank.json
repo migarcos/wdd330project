@@ -1,0 +1,58 @@
+{
+    "year": "2025",
+    "month": "feb",
+    "ranking" :[
+        {
+            "Rank": 1,
+            "Currency_Name": "Kuwaiti Dinar",
+            "Abreviation": "KWD",
+            "Country": "Kuwait"
+        },
+        {
+            "Rank": 2,
+            "Currency_Name": "Bahraini Dinar",
+            "Abreviation": "BHD",
+            "Country": "Bahrain"
+        },{        
+            "Rank": 3,
+            "Currency_Name": "Omani Rial",
+            "Abreviation": "OMR",
+            "Country": "Oman"
+        },{      
+            "Rank": 4,
+            "Currency_Name": "Jordanian Dinar",
+            "Abreviation": "JOD",
+            "Country": "Jordan"
+        },{     
+            "Rank": 5,
+            "Currency_Name": "British Pound",
+            "Abreviation": "GBP",
+            "Country": "United Kingdom"
+        },{    
+            "Rank": 6,
+            "Currency_Name": "Gibraltar Pound",
+            "Abreviation": "GIP",
+            "Country": "Gibraltar"
+        },{     
+            "Rank": 7,
+            "Currency_Name": "Cayman Islands Dollar",
+            "Abreviation": "KYD",
+            "Country": "Cayman Islands"
+        },{  
+            "Rank": 8,
+            "Currency_Name": "Swiss Franc",
+            "Abreviation": "CHF",
+            "Country": "Switzerland"
+        },{     
+            "Rank": 9,
+            "Currency_Name": "Euro",
+            "Abreviation": "EUR",
+            "Country": "European Union"
+        },{      
+            "Rank": 10,
+            "Currency_Name": "US Dollar",
+            "Abreviation": "USD",
+            "Country": "United States"
+        }
+    ]
+}

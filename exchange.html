@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Miguel Arcos Salazar">
+    <title>Exposed Economy</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/main.js" type="module"></script>
+    <script src="node_modules/@everapi/currencyapi-js/index.js" ></script>
+</head>
+<body>
+    <header id="header">
+        
+    </header>
+    <nav id="nav">
+    </nav>
+    <main>
+        <section>
+            <h1>Currency Exchange Rates</h1>
+            <div id="exchange-rate"></div>
+            <button id="fetch-rates">Fetch Exchange Rates</button>    
+        </section>
+    </main>
+    <footer id="footer">       
+    </footer>
+    <script>
+        const client = new CurrencyAPI('cur_live_ISPKqJqmEs3r0AgsNtMTKhrXqhy0XlaEnZ00S11X');
+
+        client.latest({
+            base_currency: 'USD',
+            currencies: ['EUR', 'CAD', 'GBP', 'JPY', 'AUD', 'COP', 'CNY', 'INR', 'MXN', 'BRL', 'ARS', 'CLP']
+            }).then(response => {
+            // console.log(response);
+            // save as JSON file
+            const exchangeRateDiv = document.getElementById('exchange-rate');
+            exchangeRateDiv.innerHTML = `<h2>Exchange Rates</h2><pre>${JSON.stringify(response.data, null, 2)}</pre>`;
+            // set a localstorage variable
+            localStorage.setItem('exchangeRates', JSON.stringify(response));
+        }).catch(error => {
+            console.error('Error fetching exchange rates:', error);
+            const exchangeRateDiv = document.getElementById('exchange-rate');
+            exchangeRateDiv.innerHTML = `<h2>Error fetching exchange rates</h2><p>${error.message}</p>`;
+            // retrieve from localstorage
+            const cachedRates = localStorage.getItem('exchangeRates');
+            if (cachedRates) {
+                exchangeRateDiv.innerHTML += `<h2>Cached Exchange Rates</h2><pre>${cachedRates}</pre>`;
+            }
+        });
+    </script>
+</body>
+</html>
