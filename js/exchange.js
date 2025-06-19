@@ -8,9 +8,7 @@ const exchangeRateManager = (() => {
     const BASE_CURRENCY = 'USD';
     const TARGET_CURRENCIES = ['EUR', 'CAD', 'GBP', 'JPY', 'AUD', 'COP', 'CNY', 'INR', 'MXN', 'BRL', 'ARS', 'CLP'];
 
-    /*
-     * Gets the current date in 'YYYY-MM-DD' format.
-     */
+    // Gets the current date in 'YYYY-MM-DD' format.
     function getCurrentDateFormatted() {
         const today = new Date();
         const year = today.getFullYear();
