@@ -25,3 +25,42 @@ export async function loadHeaderFooter() {
   renderWithTemplate(navTemplate, navElement);
   renderWithTemplate(footerTemplate, footerElement);
 }
+
+export async function fetchData(url) {
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+  const data = await response.json();
+  return data;
+}
+export function renderTable(template, data, container) {
+  const rendered = Mustache.render(template, { ranks: data });
+  container.innerHTML = rendered;
+}
+export function addNavigationListeners() {
+  document.querySelectorAll("nav a").forEach(link => {
+    link.addEventListener("click", function (event) {
+      event.preventDefault();
+      const target = this.getAttribute("href");
+      if (target.startsWith("#")) {
+        const section = document.querySelector(target);
+        if (section) {
+          section.scrollIntoView({ behavior: "smooth" });
+        }
+      } else {
+        window.location.href = target;
+      }
+    });
+  });
+}
+export function addScrollListener() {
+  window.addEventListener("scroll", function () {
+    const header = document.querySelector("header");
+    if (window.scrollY > 50) {
+      header.classList.add("scrolled");
+    } else {
+      header.classList.remove("scrolled");
+    }
+  });
+} 

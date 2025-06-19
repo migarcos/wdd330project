@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@everapi/currencyapi-js": "^1.0.6"
+  }
+}

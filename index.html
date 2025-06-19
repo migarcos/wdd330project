@@ -3,9 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="imgs/favicon.ico" type="image/x-icon"> 
+    <meta name="author" content="Miguel Arcos Salazar">
+    <meta name="description" content="Exposed Economy - Your one-stop solution for all economic insights. Stay updated with the latest news and trends in the global economy.">
+    <meta name="keywords" content="economy, finance, news, global economy, economic insights, currency ranking, financial news">    
     <title>Exposed Economy</title>
     <link rel="stylesheet" href="css/styles.css">
     <script src="js/main.js" type="module"></script>
+
+    <style>
+        
+        .container {
+            max-width: 600px;
+            /* margin: 0 auto; */
+            background-color: #fff;
+            padding: 1rem;
+            border: dotted red;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #0F3E49;
+            color: white;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        #news_data { display: flex; flex-wrap: wrap; border: solid red; justify-content: space-around; margin: 2rem 0;}
+        #news {  border: #0F3E49 solid 1px; max-width: 600px; padding: 2rem;}
+        .news_data { margin-bottom:2rem;}
+    </style>
 </head>
 <body>
     <header id="header">    </header>
@@ -16,15 +54,45 @@
             <h1>Welcome to Exposed Economy</h1>
             <p><strong>Your one-stop solution for all economic insights.</strong></p>
         </section>
-        <section id="services">
-            <h2>Our Services</h2>
-            <ul>
-                <li>Economic Analysis</li>
-                <li>Market Research</li>
-                <li>Consulting Services</li>
-            </ul>
-        </section>        
+
+        <section id="news_data">
+            <article id="news">
+                <h2>RELEVANT NEWS</h2>
+                <div class="news_data">
+                    <h3>Title</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In ipsum voluptatibus asperiores. Laudantium iste vel fuga neque dolorum est, officia quos doloremque rerum ex dolores autem! Ipsa minus voluptates suscipit.</p>
+                </div>
+                <div class="news_data">
+                    <h3>Title</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In ipsum voluptatibus asperiores. Laudantium iste vel fuga neque dolorum est, officia quos doloremque rerum ex dolores autem! Ipsa minus voluptates suscipit.</p>
+                </div>
+                <div class="news_data">
+                    <h3>Title</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In ipsum voluptatibus asperiores. Laudantium iste vel fuga neque dolorum est, officia quos doloremque rerum ex dolores autem! Ipsa minus voluptates suscipit.</p>
+                </div>
+            </article>
+            
+            <article  class="container">                
+                <h3>Top 10 Most Valuable Coins</h3>
+                <p>Data corresponding to: <span id="ranking-info"></span></p>
+                <div id="currency-ranking">
+                    <p>Chargin data...</p>
+                </div>        
+            </article>
+
+            <template  id="currency-row-template">
+                <tr>
+                    <td data-field="Rank"></td>
+                    <td data-field="Currency_Name"></td>
+                    <td data-field="Abreviation"></td>
+                    <td data-field="Country"></td>
+                </tr>
+            </template>
+        </section>
+        
     </main>
     <footer id="footer">    </footer>
+
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/4.0.1/mustache.min.js"></script> -->
 </body>
 </html>
