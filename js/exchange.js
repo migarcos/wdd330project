@@ -86,21 +86,21 @@ const exchangeRateManager = (() => {
 
             if (!response.ok) {
                 const errorData = await response.json().catch(() => ({}));
-                throw new Error(`Error HTTP: ${response.status} - ${response.statusText}. Detalles: ${JSON.stringify(errorData)}`);
+                throw new Error(`Error HTTP: ${response.status} - ${response.statusText}. Details: ${JSON.stringify(errorData)}`);
             }
 
             const data = await response.json();
             console.log('Datos obtenidos de currencyapi.com:', data);
 
             if (!data.last_updated_at || !data.data) {
-                console.warn("La respuesta de la API no contiene 'last_updated_at' o 'data' esperados.");
-                throw new Error("Formato de respuesta de API inesperado.");
+                console.warn("API request without 'last_updated_at' or 'data'.");
+                throw new Error("Unexpected API response format.");
             }
 
             return data;
 
         } catch (error) {
-            console.error('Fallo al obtener tasas de cambio de la API de currencyapi.com:', error);
+            console.error('Fail to obtain data from currencyapi.com:', error);
             throw error;
         }
     }
