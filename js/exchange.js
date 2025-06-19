@@ -182,6 +182,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.log('Tasas de cambio obtenidas para renderizar:', ratesData);
         renderExchangeRates(ratesData);
     } else {
-        displayMessage('No se pudieron obtener las tasas de cambio. Por favor, intente de nuevo más tarde o verifique su conexión.', true);
+        displayMessage('Data charge error: Verify connection and API connection', true);
     }
 });
