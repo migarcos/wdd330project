@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     try {
         // JSON data fetching
-        const response = await fetch('./json/rank.json');
+        const response = await fetch('./json/rank.json'); // change path from '../json/rank.json' to './json/rank.json' to match the current directory structure
         
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
