@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     try {
         // JSON data fetching
-        const response = await fetch('../json/rank.json');
+        const response = await fetch('./json/rank.json');
         
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
@@ -60,8 +60,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         container.appendChild(table);
 
     } catch (error) {
-        console.error("Error al cargar o renderizar los datos:", error);
-        container.innerHTML = `<p style="color: red;">Error al cargar el ranking: ${error.message}. Por favor, verifica la ruta del archivo JSON y tu conexión.</p>`;
+        console.error("Error chargin data:", error);
+        container.innerHTML = `<p style="color: red;">data charge error: ${error.message}. Verify conection and JSON file path.</p>`;
     }
 });
 
