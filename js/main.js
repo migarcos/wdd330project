@@ -65,6 +65,139 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 });
 
+// obtain news from NYTimes
+
+const nyt_apikey = "Sgfdrp5REmhpIXcyKTa13OMabFCgZTGl";
+const url = `https://api.nytimes.com/svc/topstories/v2/business.json?api-key=${nyt_apikey}`;
+const options = {
+  method: "GET",
+  headers: {
+    "Accept": "application/json"
+  },
+};
+
+async function getTopStories() {
+  try {
+    const response = await fetch(url, options);
+
+    const text = await response.json();
+
+    if (!response.ok) {
+      throw {
+        status: response.status,
+        statusText: response.statusText,
+        errorMessage: text,
+      };
+    }
+
+    console.log(text);
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+getTopStories();
+
+
+
+async function displayBusinessNews() {
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+
+    const container = document.querySelector("#nytimes");
+    const template = container.querySelector("template");
+    // const articles = data.results;
+    
+    const articles = data.results.filter(item => item.section === "business");
+    console.log(articles);
+    const filtered = articles.slice(0,2);
+
+    filtered.forEach(article => {
+        const clone = template.content.cloneNode(true);
+        if (article.section === "business") {
+            
+            clone.querySelector(".title").textContent = article.title;
+            // clone.querySelector(".byline").textContent = article.byline;
+            // clone.querySelector(".abstract").textContent = article.abstract;
+            clone.querySelector("img").src = article.multimedia[2].url;
+            clone.querySelector("img").alt = article.title;
+
+            container.appendChild(clone);
+        }
+    });
+  } catch (error) {
+    console.error("Error fetching or displaying news:", error);
+  }
+}
+
+displayBusinessNews();
+
+// async function getArticleContent(url) {
+//   try {
+//     const response = await fetch(url);
+//     const html = await response.text();
+
+//     const parser = new DOMParser();
+//     const doc = parser.parseFromString(html, 'text/html');
+
+//     // Try selecting the main article body section
+//     const paragraphs = doc.querySelectorAll('section[name="articleBody"] p');
+
+//     const articleText = Array.from(paragraphs)
+//       .map(p => p.textContent.trim())
+//       .filter(text => text.length > 0)
+//       .join('\n\n');
+
+//     console.log(articleText);
+//   } catch (error) {
+//     console.error("Error fetching or parsing article:", error);
+//   }
+// }
+
+// getArticleContent("https://www.nytimes.com/2025/10/02/business/dealbook/leo-hindery-dead.html");
+
+
+
+
+// const apiKey = "WHCTJ7KQP17EYN03";
+// const baseCurrency = "USD";
+// const targetCurrencies = ["CAD", "EUR", "JPY", "GBP", "AUD", "CAD", "CHF", "CHY", "HKD", "SGD", "MXN", "COP"];
+
+// async function fetchExchangeRate(toCurrency) {
+//   const url = `https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=${baseCurrency}&to_currency=${toCurrency}&apikey=${apiKey}`;
+//   const response = await fetch(url);
+//   const data = await response.json();
+//   console.log(data);
+//   return data["Realtime Currency Exchange Rate"];
+// }
+
+// async function collectExchangeRates() {
+//   try {
+//     const results = await Promise.all(
+//       targetCurrencies.map(currency => fetchExchangeRate(currency))
+//     );
+
+//     const unifiedJSON = {};
+//     results.forEach(rate => {
+//       const toCode = rate["3. To_Currency Code"];
+//       unifiedJSON[toCode] = {
+//         from: rate["1. From_Currency Code"],
+//         to: toCode,
+//         rate: rate["5. Exchange Rate"],
+//         lastRefreshed: rate["6. Last Refreshed"],
+//         timeZone: rate["7. Time Zone"]
+//       };
+//     });
+
+//     console.log(JSON.stringify(unifiedJSON, null, 2));
+//   } catch (error) {
+//     console.error("Error collecting exchange rates:", error);
+//   }
+// }
+
+// collectExchangeRates();
+
 
 // document.addEventListener('DOMContentLoaded', async () => {
 //     const container = document.getElementById('currency-ranking');
