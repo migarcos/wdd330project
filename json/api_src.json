@@ -1,0 +1,28 @@
+[
+    {
+        "srvName": "nytimes",
+        "url": "https://api.nytimes.com/svc/topstories/v2/business.json?api-key=${API_KEY}",
+        "apikey": "Sgfdrp5REmhpIXcyKTa13OMabFCgZTGl",
+        "documentation": "https://developer.nytimes.com/docs/top-stories-product/1/overview"
+    },{
+        "srvName": "alphavantage",
+        "url": "https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=USD&to_currency=COP&apikey=${API_KEY}",
+        "apikey": "902YFFP35HT0Q96A",
+        "documentation": "https://www.alphavantage.co/documentation/"
+    }, {
+        "srvName": "currencyapi",
+        "url":"https://api.currencyapi.com/v3/latest?apikey=${API_KEY}&base_currency=${BASE_CURRENCY}&currencies=${currenciesParam}",
+        "apikey": "cur_live_ISPKqJqmEs3r0AgsNtMTKhrXqhy0XlaEnZ00S11X",
+        "documentation": "https://currencyapi.com/docs"
+    }, {
+        "srvName":"worldnews",
+        "url":"",
+        "apikey":"4bef1e3da94b4820a35555bff307a662",
+        "documentation":"https://worldnewsapi.com/docs/"
+    } , {
+        "srvName": "theguardian",
+        "url": "https://content.guardianapis.com/search?page=2&q=debate&api-key=test",
+        "apikey": "979e3f35-d01e-4c27-850f-99f5c3af0ea6",
+        "documentation":"https://open-platform.theguardian.com/documentation/"
+    }
+]

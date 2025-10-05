@@ -2,6 +2,49 @@ import { loadHeaderFooter } from "./utils.mjs";
 
 loadHeaderFooter();
 
+const API_KEY = '979e3f35-d01e-4c27-850f-99f5c3af0ea6';
+
+async function getGuardianData() {
+  const url = `https://content.guardianapis.com/business?api-key=${API_KEY}`;
+
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
+    const data = await response.json();
+    console.log(data.response.results);
+    console.log(data.response.results[0].apiUrl);
+  } catch (error) {
+    console.error('Fetch failed:', error);
+  }
+
+  
+}
+
+getGuardianData();
+
+const ARTICLE_URL = 'https://content.guardianapis.com/business/2025/oct/03/lse-boost-as-beauty-group-lists-and-tinned-fish-brand-confirms-plans-for-ipo';
+
+async function getArticleDetail() {
+  const url = `${ARTICLE_URL}?api-key=${API_KEY}&show-fields=body,thumbnail,headline`;
+
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    const article = data.response.content;
+    console.log(article);
+
+    // console.log('Title:', article.fields.headline);
+    // console.log('Image URL:', article.fields.thumbnail); // Returns the main image
+    // console.log('Body:', article.fields.body); // HTML content of the article
+  } catch (error) {
+    console.error('Error:', error);
+  }
+}
+
+getArticleDetail();
+
 document.addEventListener('DOMContentLoaded', async () => {
     const container = document.getElementById('currency-ranking');
     const rankingInfoSpan = document.getElementById('ranking-info');

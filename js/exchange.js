@@ -77,7 +77,7 @@ const exchangeRateManager = (() => {
 
         // Log info to API call
         const currenciesParam = TARGET_CURRENCIES.join(',');
-        const apiUrl = `https://api.currencyapi.com/v3/latest?apikey=${API_KEY}&base_currency=${BASE_CURRENCY}&currencies=${currenciesParam}`;
+        // const apiUrl = `https://api.currencyapi.com/v3/latest?apikey=${API_KEY}&base_currency=${BASE_CURRENCY}&currencies=${currenciesParam}`;
 
         try {
             const response = await fetch(apiUrl);

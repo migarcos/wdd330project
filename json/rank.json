@@ -1,6 +1,8 @@
 {
     "year": "2025",
-    "month": "feb",
+    "month": "Sep",
+    "source": "https://www.forbesindia.com/article/explainers/highest-valued-currencies-world/85581/1",
+    "alternative":"https://www.xs.com/en/blog/strongest-currencies-in-the-world/",
     "ranking" :[
         {
             "Rank": 1,
@@ -23,26 +25,26 @@
             "Currency_Name": "Jordanian Dinar",
             "Abreviation": "JOD",
             "Country": "Jordan"
-        },{     
-            "Rank": 5,
-            "Currency_Name": "British Pound",
-            "Abreviation": "GBP",
-            "Country": "United Kingdom"
         },{    
-            "Rank": 6,
+            "Rank": 5,
             "Currency_Name": "Gibraltar Pound",
             "Abreviation": "GIP",
             "Country": "Gibraltar"
         },{     
-            "Rank": 7,
-            "Currency_Name": "Cayman Islands Dollar",
-            "Abreviation": "KYD",
-            "Country": "Cayman Islands"
+            "Rank": 6,
+            "Currency_Name": "British Pound",
+            "Abreviation": "GBP",
+            "Country": "United Kingdom"
         },{  
-            "Rank": 8,
+            "Rank": 7,
             "Currency_Name": "Swiss Franc",
             "Abreviation": "CHF",
             "Country": "Switzerland"
+        },{     
+            "Rank": 8,
+            "Currency_Name": "Cayman Islands Dollar",
+            "Abreviation": "KYD",
+            "Country": "Cayman Islands"
         },{     
             "Rank": 9,
             "Currency_Name": "Euro",
