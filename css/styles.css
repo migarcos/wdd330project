@@ -168,7 +168,7 @@ main {
 #newsIntro {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-evenly;
 
     article {
         text-align: center;
@@ -181,7 +181,7 @@ main {
         border-radius: 1rem;
         p {  padding-left: 1rem; color: ligth; }
         h3 {  padding: 8px; font-family: "lora"; font-size: medium;}
-        img { padding-left: 8px;}
+        img { padding-left: 8px; max-width: 150px; height: 150px;}
     }
 
     /* article {

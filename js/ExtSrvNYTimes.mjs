@@ -18,6 +18,7 @@ export default class ExtSrvNYTimes {
         // console.log(articles[0].title)
         // console.log(articles[0].multimedia[2].url)
 
+
         return articles;
     }
 

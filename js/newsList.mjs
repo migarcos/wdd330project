@@ -9,10 +9,10 @@ export default class newsList {
     async init() {
         const list = await this.datasource.getData();
         this.headers(this.media, list)
-        // console.log(list);
+        console.log(list);
     }
 
-    headers(media, list) {
+    async headers(media, list) {
         const headers = [];
 
         if (media === "nytimes") {
@@ -26,6 +26,19 @@ export default class newsList {
                 }
             });
         } 
+    
+        if (media === "guardian") {
+            for (const article of list) {
+                const basic = [];
+                const details = await this.datasource.getArticleDetails(article.apiUrl);
+                if (details) {
+                    basic.push("The Guardian")
+                    basic.push(details.webTitle);
+                    basic.push(details.fields.thumbnail);
+                    headers.push(basic);
+                }
+            }
+        }
         
         // console.log(headers);
         this.displayList(headers);
