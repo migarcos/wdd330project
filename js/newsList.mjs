@@ -15,7 +15,7 @@ export default class newsList {
         }
         this.data = JSON.parse(localStorage.getItem(`${this.media}Headers`));
         console.log(this.data);
-        this.displayList(this.data.slice(1));
+        this.displayList(this.data.slice(2, 10));
     }
 
     async headers(media, list) {

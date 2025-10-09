@@ -18,12 +18,12 @@ newsGuardian.init();
 const nytlastest = JSON.parse(localStorage.getItem("nytimesHeaders"));
 const grdlastest = JSON.parse(localStorage.getItem("guardianHeaders"));
 
-let topNews = [nytlastest[0], grdlastest[0]];
+let topNews = [nytlastest[0], grdlastest[0], nytlastest[1], grdlastest[1]];
 let index = 0;
 // console.log(topNews);
-document.querySelector("#heroNews p").textContent = topNews[1][0]; //  const images = [nytlastest[0][2], grdlastest[0][2]];
-document.querySelector("#heroNews img").src = topNews[1][2]; //  const titleTop = [nytlastest[0][1], grdlastest[0][1]];
-document.querySelector("#heroNews h1").textContent = topNews[1][1]; // const media = [nytlastest[0][0], grdlastest[0][0]];
+document.querySelector("#heroNews p").textContent = topNews[3][0]; //  const images = [nytlastest[0][2], grdlastest[0][2]];
+document.querySelector("#heroNews img").src = topNews[3][2]; //  const titleTop = [nytlastest[0][1], grdlastest[0][1]];
+document.querySelector("#heroNews h1").textContent = topNews[3][1]; // const media = [nytlastest[0][0], grdlastest[0][0]];
 
 setInterval( () => {
     document.querySelector("#heroNews h1").setAttribute("data-change", "false");
