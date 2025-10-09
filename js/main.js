@@ -1,49 +1,9 @@
-import { loadHeaderFooter } from "./utils.mjs";
+import { loadHeaderFooter, checkUpd } from "./utils.mjs";
 
 loadHeaderFooter();
 
-const API_KEY = '979e3f35-d01e-4c27-850f-99f5c3af0ea6';
+const update = checkUpd("lastUpd");
 
-async function getGuardianData() {
-  const url = `https://content.guardianapis.com/business?api-key=${API_KEY}`;
-
-  try {
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error(`Error: ${response.status}`);
-    }
-    const data = await response.json();
-    console.log(data.response.results);
-    console.log(data.response.results[0].apiUrl);
-  } catch (error) {
-    console.error('Fetch failed:', error);
-  }
-
-  
-}
-
-getGuardianData();
-
-const ARTICLE_URL = 'https://content.guardianapis.com/business/2025/oct/03/lse-boost-as-beauty-group-lists-and-tinned-fish-brand-confirms-plans-for-ipo';
-
-async function getArticleDetail() {
-  const url = `${ARTICLE_URL}?api-key=${API_KEY}&show-fields=body,thumbnail,headline`;
-
-  try {
-    const response = await fetch(url);
-    const data = await response.json();
-    const article = data.response.content;
-    console.log(article);
-
-    // console.log('Title:', article.fields.headline);
-    // console.log('Image URL:', article.fields.thumbnail); // Returns the main image
-    // console.log('Body:', article.fields.body); // HTML content of the article
-  } catch (error) {
-    console.error('Error:', error);
-  }
-}
-
-getArticleDetail();
 
 document.addEventListener('DOMContentLoaded', async () => {
     const container = document.getElementById('currency-ranking');
@@ -108,73 +68,116 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 });
 
+// const API_KEY = '979e3f35-d01e-4c27-850f-99f5c3af0ea6';
+
+// async function getGuardianData() {
+//   const url = `https://content.guardianapis.com/business?api-key=${API_KEY}`;
+
+//   try {
+//     const response = await fetch(url);
+//     if (!response.ok) {
+//       throw new Error(`Error: ${response.status}`);
+//     }
+//     const data = await response.json();
+//     console.log(data.response.results);
+//     console.log(data.response.results[0].apiUrl);
+//   } catch (error) {
+//     console.error('Fetch failed:', error);
+//   }
+
+  
+// }
+
+// getGuardianData();
+
+// const ARTICLE_URL = 'https://content.guardianapis.com/business/2025/oct/03/lse-boost-as-beauty-group-lists-and-tinned-fish-brand-confirms-plans-for-ipo';
+
+// async function getArticleDetail() {
+//   const url = `${ARTICLE_URL}?api-key=${API_KEY}&show-fields=body,thumbnail,headline`;
+
+//   try {
+//     const response = await fetch(url);
+//     const data = await response.json();
+//     const article = data.response.content;
+//     console.log(article);
+
+//     // console.log('Title:', article.fields.headline);
+//     // console.log('Image URL:', article.fields.thumbnail); // Returns the main image
+//     // console.log('Body:', article.fields.body); // HTML content of the article
+//   } catch (error) {
+//     console.error('Error:', error);
+//   }
+// }
+
+// getArticleDetail();
+
 // obtain news from NYTimes
 
-const nyt_apikey = "Sgfdrp5REmhpIXcyKTa13OMabFCgZTGl";
-const url = `https://api.nytimes.com/svc/topstories/v2/business.json?api-key=${nyt_apikey}`;
-const options = {
-  method: "GET",
-  headers: {
-    "Accept": "application/json"
-  },
-};
+// const nyt_apikey = "Sgfdrp5REmhpIXcyKTa13OMabFCgZTGl";
+// const url = `https://api.nytimes.com/svc/topstories/v2/business.json?api-key=${nyt_apikey}`;
+// const options = {
+//   method: "GET",
+//   headers: {
+//     "Accept": "application/json"
+//   },
+// };
 
-async function getTopStories() {
-  try {
-    const response = await fetch(url, options);
+// async function getTopStories() {
+//   try {
+//     const response = await fetch(url, options);
 
-    const text = await response.json();
+//     const text = await response.json();
 
-    if (!response.ok) {
-      throw {
-        status: response.status,
-        statusText: response.statusText,
-        errorMessage: text,
-      };
-    }
+//     if (!response.ok) {
+//       throw {
+//         status: response.status,
+//         statusText: response.statusText,
+//         errorMessage: text,
+//       };
+//     }
 
-    console.log(text);
-  } catch (err) {
-    console.error(err);
-  }
-}
+//     console.log(text);
+//   } catch (err) {
+//     console.error(err);
+//   }
+// }
 
-getTopStories();
+// getTopStories();
 
 
 
-async function displayBusinessNews() {
-  try {
-    const response = await fetch(url);
-    const data = await response.json();
+// async function displayBusinessNews() {
+//   try {
+//     const response = await fetch(url);
+//     const data = await response.json();
 
-    const container = document.querySelector("#nytimes");
-    const template = container.querySelector("template");
-    // const articles = data.results;
+//     const container = document.querySelector("#nytimes");
+//     const template = container.querySelector("template");
+//     // const articles = data.results;
     
-    const articles = data.results.filter(item => item.section === "business");
-    console.log(articles);
-    const filtered = articles.slice(0,2);
+//     const articles = data.results.filter(item => item.section === "business");
+//     console.log(articles);
+//     const filtered = articles.slice(0,2);
 
-    filtered.forEach(article => {
-        const clone = template.content.cloneNode(true);
-        if (article.section === "business") {
+//     filtered.forEach(article => {
+//         const clone = template.content.cloneNode(true);
+//         if (article.section === "business") {
             
-            clone.querySelector(".title").textContent = article.title;
-            // clone.querySelector(".byline").textContent = article.byline;
-            // clone.querySelector(".abstract").textContent = article.abstract;
-            clone.querySelector("img").src = article.multimedia[2].url;
-            clone.querySelector("img").alt = article.title;
+//             clone.querySelector(".title").textContent = article.title;
+//             // clone.querySelector(".byline").textContent = article.byline;
+//             // clone.querySelector(".abstract").textContent = article.abstract;
+//             clone.querySelector("img").src = article.multimedia[2].url;
+//             clone.querySelector("img").alt = article.title;
 
-            container.appendChild(clone);
-        }
-    });
-  } catch (error) {
-    console.error("Error fetching or displaying news:", error);
-  }
-}
+//             container.appendChild(clone);
+//         }
+//     });
+//   } catch (error) {
+//     console.error("Error fetching or displaying news:", error);
+//   }
+// }
 
-displayBusinessNews();
+// displayBusinessNews();
 
 // async function getArticleContent(url) {
 //   try {

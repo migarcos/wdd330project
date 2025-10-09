@@ -1,3 +1,21 @@
+export function checkUpd(key) {
+  const lastUpd = localStorage.getItem(key);
+  // console.log(`last Updt: ${lastUpd}`);
+
+  const actualDay = new Date();
+  // console.log(`actualDay: ${actualDay.toISOString().split('T')[0]}`)
+
+
+  if (!lastUpd || lastUpd !== actualDay.toISOString().split('T')[0] ) {
+      localStorage.setItem(key, actualDay.toISOString().split('T')[0]);
+      // console.log("Update required")
+      return true;
+  } else {
+      // console.log("no required")
+      return false;
+  }
+}
+
 export function renderWithTemplate(template, parentElement, data, callback) {
   parentElement.innerHTML = template;
   if (callback) {
@@ -34,10 +52,12 @@ export async function fetchData(url) {
   const data = await response.json();
   return data;
 }
+
 export function renderTable(template, data, container) {
   const rendered = Mustache.render(template, { ranks: data });
   container.innerHTML = rendered;
 }
+
 export function addNavigationListeners() {
   document.querySelectorAll("nav a").forEach(link => {
     link.addEventListener("click", function (event) {
@@ -54,6 +74,7 @@ export function addNavigationListeners() {
     });
   });
 }
+
 export function addScrollListener() {
   window.addEventListener("scroll", function () {
     const header = document.querySelector("header");

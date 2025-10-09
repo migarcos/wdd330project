@@ -1,15 +1,21 @@
+import { checkUpd } from "./utils.mjs";
 
 export default class newsList {
 
     constructor(media, datasource) {
         this.media = media;
         this.datasource = datasource;
+        this.data = [];
     }
 
     async init() {
-        const list = await this.datasource.getData();
-        this.headers(this.media, list)
-        console.log(list);
+        if (checkUpd(this.media)) {
+            const list = await this.datasource.getData();
+            this.headers(this.media, list);
+        }
+        this.data = JSON.parse(localStorage.getItem(`${this.media}Headers`));
+        console.log(this.data);
+        this.displayList(this.data.slice(1));
     }
 
     async headers(media, list) {
@@ -22,8 +28,11 @@ export default class newsList {
                     basic.push("New York Times")
                     basic.push(article.title);
                     basic.push(article.multimedia[2].url);
+                    basic.push(article.abstract);
+                    basic.push(article.multimedia[1].url);
                     headers.push(basic);
                 }
+                localStorage.setItem('${this.media}Headers', JSON.stringify(headers));
             });
         } 
     
@@ -32,20 +41,22 @@ export default class newsList {
                 const basic = [];
                 const details = await this.datasource.getArticleDetails(article.apiUrl);
                 if (details) {
-                    basic.push("The Guardian")
+                    basic.push(`The Guardian`)
                     basic.push(details.webTitle);
                     basic.push(details.fields.thumbnail);
+                    basic.push(details.fields.body);
                     headers.push(basic);
                 }
+                localStorage.setItem('${this.media}Headers', JSON.stringify(headers));
             }
         }
-        
         // console.log(headers);
-        this.displayList(headers);
+
+        // this.displayList(headers.slice(1));
     }
 
-    displayList(headers) {
-        headers.forEach( newsIndividual => {
+    displayList(data) {
+        data.forEach( newsIndividual => {
             listTemplate(newsIndividual);
         });
     }
