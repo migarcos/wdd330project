@@ -56,21 +56,26 @@ export default class newsList {
     }
 
     displayList(data) {
-        data.forEach( newsIndividual => {
-            listTemplate(newsIndividual);
+        data.forEach( (newsIndividual, index) => {
+            listTemplate(newsIndividual, index);
         });
     }
 }
 
-function listTemplate(newscard) {
+function listTemplate(newscard, index) {
     const docElement = document.querySelector("#newsIntro");
     const template = document.querySelector("template");
     const clone = template.content.cloneNode(true);
+    let media = "";
 
     clone.querySelector("span").textContent = newscard[0];
     clone.querySelector("h3").textContent = newscard[1];
     clone.querySelector("img").src = newscard[2];
     clone.querySelector("img").alt = newscard[1];
+
+    if (newscard[0] === "New York Times") { media = "nytimesHeaders";}
+    else { media = "guardianHeaders";}
+    clone.querySelector("a").href = `newsdetail.html?media=${media}&order=${index + 2}`;
 
     docElement.appendChild(clone);
 }
