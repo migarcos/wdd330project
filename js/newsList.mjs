@@ -32,7 +32,7 @@ export default class newsList {
                     basic.push(article.multimedia[1].url);
                     headers.push(basic);
                 }
-                localStorage.setItem('${this.media}Headers', JSON.stringify(headers));
+                localStorage.setItem(`${this.media}Headers`, JSON.stringify(headers));
             });
         } 
     
@@ -47,7 +47,7 @@ export default class newsList {
                     basic.push(details.fields.body);
                     headers.push(basic);
                 }
-                localStorage.setItem('${this.media}Headers', JSON.stringify(headers));
+                localStorage.setItem(`${this.media}Headers`, JSON.stringify(headers));
             }
         }
         // console.log(headers);
