@@ -14,7 +14,7 @@ export default class newsList {
             this.headers(this.media, list);
         }
         this.data = JSON.parse(localStorage.getItem(`${this.media}Headers`));
-        console.log(this.data);
+        // console.log(this.data);
         this.displayList(this.data.slice(2, 9));
     }
 

@@ -49,4 +49,4 @@ setInterval( () => {
     document.querySelector("#heroNews h1").setAttribute("data-change", "true");
 
     index = (index + 1 ) % topNews.length;
-}, 10000);
+}, 8000);

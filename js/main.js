@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         // theader row creation
         const headerRow = document.createElement('tr');
-        ['Rank', 'Currency Name', 'Abreviation', 'Country'].forEach(headerText => {
+        ['Rank', 'Currency Name', 'Abrev', 'Value'].forEach(headerText => {
             const th = document.createElement('th');
             th.textContent = headerText;
             headerRow.appendChild(th);
@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             row.querySelector('[data-field="Rank"]').textContent = currency.Rank;
             row.querySelector('[data-field="Currency_Name"]').textContent = currency.Currency_Name;
             row.querySelector('[data-field="Abreviation"]').textContent = currency.Abreviation;
-            row.querySelector('[data-field="Country"]').textContent = currency.Country;
+            row.querySelector('[data-field="Country"]').textContent = `USD $${currency.value.toFixed(2)}`;
             
             // Add the row to the tbody
             tbody.appendChild(row);
@@ -206,43 +206,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
 
-// const apiKey = "WHCTJ7KQP17EYN03";
-// const baseCurrency = "USD";
-// const targetCurrencies = ["CAD", "EUR", "JPY", "GBP", "AUD", "CAD", "CHF", "CHY", "HKD", "SGD", "MXN", "COP"];
 
-// async function fetchExchangeRate(toCurrency) {
-//   const url = `https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=${baseCurrency}&to_currency=${toCurrency}&apikey=${apiKey}`;
-//   const response = await fetch(url);
-//   const data = await response.json();
-//   console.log(data);
-//   return data["Realtime Currency Exchange Rate"];
-// }
-
-// async function collectExchangeRates() {
-//   try {
-//     const results = await Promise.all(
-//       targetCurrencies.map(currency => fetchExchangeRate(currency))
-//     );
-
-//     const unifiedJSON = {};
-//     results.forEach(rate => {
-//       const toCode = rate["3. To_Currency Code"];
-//       unifiedJSON[toCode] = {
-//         from: rate["1. From_Currency Code"],
-//         to: toCode,
-//         rate: rate["5. Exchange Rate"],
-//         lastRefreshed: rate["6. Last Refreshed"],
-//         timeZone: rate["7. Time Zone"]
-//       };
-//     });
-
-//     console.log(JSON.stringify(unifiedJSON, null, 2));
-//   } catch (error) {
-//     console.error("Error collecting exchange rates:", error);
-//   }
-// }
-
-// collectExchangeRates();
 
 
 // document.addEventListener('DOMContentLoaded', async () => {

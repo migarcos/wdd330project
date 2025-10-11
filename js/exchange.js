@@ -1,187 +1,232 @@
-import { loadHeaderFooter } from "./utils.mjs";
+import { loadHeaderFooter, checkUpd } from "./utils.mjs";
 
 loadHeaderFooter();
 
-const exchangeRateManager = (() => {
-    const LOCAL_STORAGE_KEY_EXCHANGE_RATES = 'exchangeRates';
-    const API_KEY = "cur_live_ISPKqJqmEs3r0AgsNtMTKhrXqhy0XlaEnZ00S11X";
-    const BASE_CURRENCY = 'USD';
-    const TARGET_CURRENCIES = ['EUR', 'CAD', 'GBP', 'JPY', 'AUD', 'COP', 'CNY', 'INR', 'MXN', 'BRL', 'ARS', 'CLP'];
+//  AlphaVantage currency values
+const apiKey = "WHCTJ7KQP17EYN03";
+const baseCurrency = "USD";
+const targetCurrencies = ["COP", "CAD", "EUR", "JPY", "GBP", "CHF", "CNY", "HKD", "SGD", "MXN"];
 
-    // Gets the current date in 'YYYY-MM-DD' format.
-    function getCurrentDateFormatted() {
-        const today = new Date();
-        const year = today.getFullYear();
-        const month = String(today.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
-        const day = String(today.getDate()).padStart(2, '0');
-        return `${year}-${month}-${day}`;
-    }
+if (checkUpd("alpha")) {
+    collectExchangeRates();
+}
 
-    // Extracts the date part (YYYY-MM-DD)  datetime string.    
-    function extractDateFromIsoString(dateTimeString) {
-        if (typeof dateTimeString !== 'string' || dateTimeString.length < 10) {
-            return null;
-        }
-        return dateTimeString.substring(0, 10);
-    }
+async function fetchExchangeRate(toCurrency) {
+  const url = `https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=${baseCurrency}&to_currency=${toCurrency}&apikey=${apiKey}`;
+  const response = await fetch(url);
+  const data = await response.json();
+  console.log(data);
+  return data["Realtime Currency Exchange Rate"];
+}
 
+async function collectExchangeRates() {
+  try {
+    const results = await Promise.all(
+      targetCurrencies.map(currency => fetchExchangeRate(currency))
+    );
 
-    function shouldCallAPIForExchangeRates() {
-        const storedDataString = localStorage.getItem(LOCAL_STORAGE_KEY_EXCHANGE_RATES);
-        const currentDate = getCurrentDateFormatted();
+    const unifiedJSON = {};
+    results.forEach(rate => {
+      const toCode = rate["3. To_Currency Code"];
+      unifiedJSON[toCode] = {
+        from: rate["1. From_Currency Code"],
+        to: toCode,
+        rate: rate["5. Exchange Rate"],
+        lastRefreshed: rate["6. Last Refreshed"],
+        timeZone: rate["7. Time Zone"]
+      };
+    });
 
-        if (!storedDataString) {
-            console.log('No exchange rate data found in localStorage. API call needed.');
-            return true; // No data, so definitely call API
-        }
+    localStorage.setItem("alphaData",(JSON.stringify(unifiedJSON, null, 2)));
+  } catch (error) {
+    console.error("Error collecting exchange rates:", error);
+  }
+}
 
-        try {
-            const storedData = JSON.parse(storedDataString);
-
-            if (!storedData || !storedData.last_updated_at) {
-                console.warn('Stored exchange rate data is missing "last_updated_at" field. API call needed.');
-                return true; // Malformed data, call API
-            }
-
-            const lastUpdateAtStored = extractDateFromIsoString(storedData.last_updated_at);
-
-            console.log(`Current Date (Popayán, CO): ${currentDate}`);
-            console.log(`Last Update Date in LocalStorage: ${lastUpdateAtStored}`);
-
-            if (!lastUpdateAtStored || lastUpdateAtStored !== currentDate) {
-                console.log('Dates are different or invalid. API call needed.');
-                return true; // Dates don't match, or extraction failed, call API
-            } else {
-                console.log('Dates match. No API call needed.');
-                return false; // Dates match, no API call
-            }
-        } catch (error) {
-            console.error('Error parsing exchange rates from localStorage:', error);
-            // If parsing fails, data might be corrupt, so call API to refresh
-            return true;
-        }
-    }
-
-    function saveExchangeRatesToLocalStorage(newData) {
-        try {
-            localStorage.setItem(LOCAL_STORAGE_KEY_EXCHANGE_RATES, JSON.stringify(newData));
-            console.log('Exchange rates saved to localStorage.');
-        } catch (error) {
-            console.error('Failed to save exchange rates to localStorage:', error);
-        }
-    }
+// collectExchangeRates();
 
 
-    async function fetchExchangeRatesFromAPI() {
-        console.log('Callin API currencyapi.com...');
 
-        // Log info to API call
-        const currenciesParam = TARGET_CURRENCIES.join(',');
-        // const apiUrl = `https://api.currencyapi.com/v3/latest?apikey=${API_KEY}&base_currency=${BASE_CURRENCY}&currencies=${currenciesParam}`;
+// const exchangeRateManager = (() => {
+//     const LOCAL_STORAGE_KEY_EXCHANGE_RATES = 'exchangeRates';
+//     const API_KEY = "cur_live_ISPKqJqmEs3r0AgsNtMTKhrXqhy0XlaEnZ00S11X";
+//     const BASE_CURRENCY = 'USD';
+//     const TARGET_CURRENCIES = ['EUR', 'CAD', 'GBP', 'JPY', 'AUD', 'COP', 'CNY', 'INR', 'MXN', 'BRL', 'ARS', 'CLP'];
 
-        try {
-            const response = await fetch(apiUrl);
+//     // Gets the current date in 'YYYY-MM-DD' format.
+//     function getCurrentDateFormatted() {
+//         const today = new Date();
+//         const year = today.getFullYear();
+//         const month = String(today.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+//         const day = String(today.getDate()).padStart(2, '0');
+//         return `${year}-${month}-${day}`;
+//     }
 
-            if (!response.ok) {
-                const errorData = await response.json().catch(() => ({}));
-                throw new Error(`Error HTTP: ${response.status} - ${response.statusText}. Details: ${JSON.stringify(errorData)}`);
-            }
-
-            const data = await response.json();
-            console.log('Datos obtenidos de currencyapi.com:', data);
-
-            if (!data.last_updated_at || !data.data) {
-                console.warn("API request without 'last_updated_at' or 'data'.");
-                throw new Error("Unexpected API response format.");
-            }
-
-            return data;
-
-        } catch (error) {
-            console.error('Fail to obtain data from currencyapi.com:', error);
-            throw error;
-        }
-    }
+//     // Extracts the date part (YYYY-MM-DD)  datetime string.    
+//     function extractDateFromIsoString(dateTimeString) {
+//         if (typeof dateTimeString !== 'string' || dateTimeString.length < 10) {
+//             return null;
+//         }
+//         return dateTimeString.substring(0, 10);
+//     }
 
 
-    async function getExchangeRates() {
-        if (shouldCallAPIForExchangeRates()) {
-            try {
-                const apiData = await fetchExchangeRatesFromAPI();
-                saveExchangeRatesToLocalStorage(apiData);
-                return apiData;
-            } catch (error) {
-                console.error('Failed to get exchange rates from API:', error);
-                return null; // Handle error: e.g., return cached data if available, or throw
-            }
-        } else {
-            // If no API call is needed, retrieve from localStorage
-            try {
-                const storedDataString = localStorage.getItem(LOCAL_STORAGE_KEY_EXCHANGE_RATES);
-                return JSON.parse(storedDataString);
-            } catch (error) {
-                console.error('Error retrieving existing data from localStorage:', error);
-                return null;
-            }
-        }
-    }
+//     function shouldCallAPIForExchangeRates() {
+//         const storedDataString = localStorage.getItem(LOCAL_STORAGE_KEY_EXCHANGE_RATES);
+//         const currentDate = getCurrentDateFormatted();
 
-    return {
-        getExchangeRates,
-        shouldCallAPIForExchangeRates,
-        saveExchangeRatesToLocalStorage,
-        fetchExchangeRatesFromAPI
-    };
-})();
+//         if (!storedDataString) {
+//             console.log('No exchange rate data found in localStorage. API call needed.');
+//             return true; // No data, so definitely call API
+//         }
+
+//         try {
+//             const storedData = JSON.parse(storedDataString);
+
+//             if (!storedData || !storedData.last_updated_at) {
+//                 console.warn('Stored exchange rate data is missing "last_updated_at" field. API call needed.');
+//                 return true; // Malformed data, call API
+//             }
+
+//             const lastUpdateAtStored = extractDateFromIsoString(storedData.last_updated_at);
+
+//             console.log(`Current Date (Popayán, CO): ${currentDate}`);
+//             console.log(`Last Update Date in LocalStorage: ${lastUpdateAtStored}`);
+
+//             if (!lastUpdateAtStored || lastUpdateAtStored !== currentDate) {
+//                 console.log('Dates are different or invalid. API call needed.');
+//                 return true; // Dates don't match, or extraction failed, call API
+//             } else {
+//                 console.log('Dates match. No API call needed.');
+//                 return false; // Dates match, no API call
+//             }
+//         } catch (error) {
+//             console.error('Error parsing exchange rates from localStorage:', error);
+//             // If parsing fails, data might be corrupt, so call API to refresh
+//             return true;
+//         }
+//     }
+
+//     function saveExchangeRatesToLocalStorage(newData) {
+//         try {
+//             localStorage.setItem(LOCAL_STORAGE_KEY_EXCHANGE_RATES, JSON.stringify(newData));
+//             console.log('Exchange rates saved to localStorage.');
+//         } catch (error) {
+//             console.error('Failed to save exchange rates to localStorage:', error);
+//         }
+//     }
 
 
-document.addEventListener('DOMContentLoaded', async () => {
-    const ratesListSection = document.getElementById('ratesList');
-    const lastUpdatedDisplay = document.getElementById('last-updated-display');
+//     async function fetchExchangeRatesFromAPI() {
+//         console.log('Callin API currencyapi.com...');
 
-    // Display over UI
-    function displayMessage(message, isError = false) {
-        ratesListSection.innerHTML = `<p class="${isError ? 'error-message' : ''}">${message}</p>`;
-    }
+//         // Log info to API call
+//         const currenciesParam = TARGET_CURRENCIES.join(',');
+//         // const apiUrl = `https://api.currencyapi.com/v3/latest?apikey=${API_KEY}&base_currency=${BASE_CURRENCY}&currencies=${currenciesParam}`;
 
-    // render the exchange rates
-    function renderExchangeRates(ratesData) {
-        if (!ratesData || !ratesData.data) {
-            displayMessage('There\'s no data available.', true);
-            return;
-        }
+//         try {
+//             const response = await fetch(apiUrl);
 
-        // Display last updated date
-        const lastUpdateDate = ratesData.last_updated_at ?
-            new Date(ratesData.last_updated_at).toLocaleString() :
-            'Unknown date';
-        lastUpdatedDisplay.textContent = lastUpdateDate;
+//             if (!response.ok) {
+//                 const errorData = await response.json().catch(() => ({}));
+//                 throw new Error(`Error HTTP: ${response.status} - ${response.statusText}. Details: ${JSON.stringify(errorData)}`);
+//             }
 
-        // clear previous content
-        ratesListSection.innerHTML = '';
-        const ul = document.createElement('ul');
+//             const data = await response.json();
+//             console.log('Datos obtenidos de currencyapi.com:', data);
 
-        // currencies iteration
-        for (const currencyCode in ratesData.data) {
-            if (ratesData.data.hasOwnProperty(currencyCode)) {
-                const currency = ratesData.data[currencyCode];
-                const li = document.createElement('li');
-                li.innerHTML = `<strong>${currency.code}</strong>: <span>${currency.value.toFixed(4)}</span>`;
-                ul.appendChild(li);
-            }
-        }
-        ratesListSection.appendChild(ul);
-    }
+//             if (!data.last_updated_at || !data.data) {
+//                 console.warn("API request without 'last_updated_at' or 'data'.");
+//                 throw new Error("Unexpected API response format.");
+//             }
 
-    // --- Main  ---
-    displayMessage('chargin data...');
+//             return data;
 
-    const ratesData = await exchangeRateManager.getExchangeRates();
+//         } catch (error) {
+//             console.error('Fail to obtain data from currencyapi.com:', error);
+//             throw error;
+//         }
+//     }
 
-    if (ratesData) {
-        console.log('Tasas de cambio obtenidas para renderizar:', ratesData);
-        renderExchangeRates(ratesData);
-    } else {
-        displayMessage('Data charge error: Verify connection and API connection', true);
-    }
-});
+
+//     async function getExchangeRates() {
+//         if (shouldCallAPIForExchangeRates()) {
+//             try {
+//                 const apiData = await fetchExchangeRatesFromAPI();
+//                 saveExchangeRatesToLocalStorage(apiData);
+//                 return apiData;
+//             } catch (error) {
+//                 console.error('Failed to get exchange rates from API:', error);
+//                 return null; // Handle error: e.g., return cached data if available, or throw
+//             }
+//         } else {
+//             // If no API call is needed, retrieve from localStorage
+//             try {
+//                 const storedDataString = localStorage.getItem(LOCAL_STORAGE_KEY_EXCHANGE_RATES);
+//                 return JSON.parse(storedDataString);
+//             } catch (error) {
+//                 console.error('Error retrieving existing data from localStorage:', error);
+//                 return null;
+//             }
+//         }
+//     }
+
+//     return {
+//         getExchangeRates,
+//         shouldCallAPIForExchangeRates,
+//         saveExchangeRatesToLocalStorage,
+//         fetchExchangeRatesFromAPI
+//     };
+// })();
+
+
+// document.addEventListener('DOMContentLoaded', async () => {
+//     const ratesListSection = document.getElementById('ratesList');
+//     const lastUpdatedDisplay = document.getElementById('last-updated-display');
+
+//     // Display over UI
+//     function displayMessage(message, isError = false) {
+//         ratesListSection.innerHTML = `<p class="${isError ? 'error-message' : ''}">${message}</p>`;
+//     }
+
+//     // render the exchange rates
+//     function renderExchangeRates(ratesData) {
+//         if (!ratesData || !ratesData.data) {
+//             displayMessage('There\'s no data available.', true);
+//             return;
+//         }
+
+//         // Display last updated date
+//         const lastUpdateDate = ratesData.last_updated_at ?
+//             new Date(ratesData.last_updated_at).toLocaleString() :
+//             'Unknown date';
+//         lastUpdatedDisplay.textContent = lastUpdateDate;
+
+//         // clear previous content
+//         ratesListSection.innerHTML = '';
+//         const ul = document.createElement('ul');
+
+//         // currencies iteration
+//         for (const currencyCode in ratesData.data) {
+//             if (ratesData.data.hasOwnProperty(currencyCode)) {
+//                 const currency = ratesData.data[currencyCode];
+//                 const li = document.createElement('li');
+//                 li.innerHTML = `<strong>${currency.code}</strong>: <span>${currency.value.toFixed(4)}</span>`;
+//                 ul.appendChild(li);
+//             }
+//         }
+//         ratesListSection.appendChild(ul);
+//     }
+
+//     // --- Main  ---
+//     displayMessage('chargin data...');
+
+//     const ratesData = await exchangeRateManager.getExchangeRates();
+
+//     if (ratesData) {
+//         console.log('Tasas de cambio obtenidas para renderizar:', ratesData);
+//         renderExchangeRates(ratesData);
+//     } else {
+//         displayMessage('Data charge error: Verify connection and API connection', true);
+//     }
+// });
