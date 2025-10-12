@@ -31,7 +31,8 @@ async function collectExchangeRates() {
       unifiedJSON[toCode] = {
         from: rate["1. From_Currency Code"],
         to: toCode,
-        rate: rate["5. Exchange Rate"],
+        currency: rate["4. To_Currency Name"],
+        rate: rate["5. Exchange Rate"],     
         lastRefreshed: rate["6. Last Refreshed"],
         timeZone: rate["7. Time Zone"]
       };
@@ -43,7 +44,6 @@ async function collectExchangeRates() {
   }
 }
 
-// collectExchangeRates();
 
 
 
