@@ -17,16 +17,16 @@
     </header>
     <nav id="nav">
     </nav>
-    <main>
-        <h1>Exchange Rates versus US Dollar</h1>
-        <p>Base: USD - Last update: <span id="last-updated-display">charging...</span></p>
-
-        
-        <section id="ratesList">
+    <main id="exchange">
+        <!-- <h1>Exchange Rates versus US Dollar</h1>
+        <p>Base: USD - Last update: <span id="last-updated-display">charging...</span></p> -->
+       
+        <!-- <section id="ratesList">
             <p>Charging data...</p>
-        </section>
+        </section> -->
 
-        <section id="alphaData">
+        <section id="alphaData" class="container">
+            <h2>Exchange Rates versus US Dollar</h2>
             <table>
                 <thead>
                     <tr>
@@ -46,6 +46,29 @@
                     <td data-rate></td>
                 </tr>
             </template>
+        </section>
+
+        <section id="exchange-form" class="container">
+            <h2>CURRENCIES EXCHANGE </h2>
+            <form action="" id="form-exchange">
+                <fieldset> 
+                    <legend> AMOUNT </legend>
+                    <input type="text" id="amount" class="inout">
+                    <fieldset id="currencies">
+                        <label for=""> From:
+                            <input type="text" name="" id="" placeholder="USD">
+                        </label>
+                        <button> </button>
+                        <label for=""> To:
+                            <input type="text" name="" id="" placeholder="COP">
+                        </label>
+                    </fieldset>
+                </fieldset>
+                <fieldset>
+                    <legend> Exchange: </legend>
+                    <input type="text" id="exchange-output" disabled class="inout">
+                </fieldset>
+            </form>
         </section>
         
     </main>

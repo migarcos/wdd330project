@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const tbody = document.createElement('tbody');
 
         const headerRow = document.createElement('tr');
-        ['Rank', 'Name', 'Company', 'Value'].forEach(headerText => {
+        ['Rank', 'Name', 'Company', 'Net Worth'].forEach(headerText => {
             const th = document.createElement('th');
             th.textContent = headerText;
             headerRow.appendChild(th);

@@ -2,6 +2,15 @@ import { loadHeaderFooter, checkUpd } from "./utils.mjs";
 
 loadHeaderFooter();
 
+const amount = document.querySelector("#amount");
+const output = document.querySelector("#exchange-output");
+
+amount.addEventListener("input", () => {
+  const val = parseFloat(amount.value);
+  console.log( (val * 3920.75).toFixed(2) );
+  output.value = isNaN(val) ? "Invalid Amount" : (val * 3920.75).toFixed(2);
+});
+
 //  AlphaVantage currency values
 const apiKey = "WHCTJ7KQP17EYN03";
 const baseCurrency = "USD";
@@ -70,14 +79,6 @@ function displayCurrencyRates() {
         const formattedRate = parseFloat(rateInfo.rate).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 6 });
         newRow.querySelector('[data-rate]').textContent = formattedRate;
         
-        // 4. Última Actualización (Formateada)
-        // const date = new Date(rateInfo.lastRefreshed + 'Z'); 
-        // newRow.querySelector('[data-refresh]').textContent = date.toLocaleTimeString('es-ES', { 
-        //     hour: '2-digit', 
-        //     minute: '2-digit', 
-        //     day: '2-digit', 
-        //     month: 'short' 
-        // });
 
         tableBody.appendChild(newRow);
     });
