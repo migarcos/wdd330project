@@ -17,13 +17,35 @@
     </header>
     <nav id="nav">
     </nav>
-    <main  class="container">
+    <main>
         <h1>Exchange Rates versus US Dollar</h1>
         <p>Base: USD - Last update: <span id="last-updated-display">charging...</span></p>
 
         
         <section id="ratesList">
             <p>Charging data...</p>
+        </section>
+
+        <section id="alphaData">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Currency Name</th>
+                        <th>Abrev</th>
+                        <th>Rate</th>
+                    </tr>
+                </thead>
+                <tbody id="currency-table-body">
+                </tbody>
+            </table>
+            
+            <template id="currency-row-template">
+                <tr>
+                    <td data-name></td>
+                    <td data-abrev></td>
+                    <td data-rate></td>
+                </tr>
+            </template>
         </section>
         
     </main>

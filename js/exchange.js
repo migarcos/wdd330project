@@ -21,6 +21,7 @@ async function fetchExchangeRate(toCurrency) {
 
 async function collectExchangeRates() {
   try {
+    // to execute simultaneously (in parallel), no one after other
     const results = await Promise.all(
       targetCurrencies.map(currency => fetchExchangeRate(currency))
     );
@@ -44,14 +45,52 @@ async function collectExchangeRates() {
   }
 }
 
+function displayCurrencyRates() {
+    const dataString = localStorage.getItem('alphaData');
+    
+    if (!dataString) {
+        document.getElementById('currency-table-body').innerHTML = '<tr><td colspan="4">No hay datos de tasas de cambio disponibles.</td></tr>';
+        return;
+    }
 
+    const currencyData = JSON.parse(dataString);
+
+    const template = document.getElementById('currency-row-template');
+    const tableBody = document.getElementById('currency-table-body');
+    tableBody.innerHTML = ''; 
+
+    Object.entries(currencyData).forEach(([abbrev, rateInfo]) => {
+        
+        const newRow = template.content.cloneNode(true);
+        
+        newRow.querySelector('[data-abrev]').textContent = abbrev; 
+
+        newRow.querySelector('[data-name]').textContent = rateInfo.currency;
+        
+        const formattedRate = parseFloat(rateInfo.rate).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 6 });
+        newRow.querySelector('[data-rate]').textContent = formattedRate;
+        
+        // 4. Última Actualización (Formateada)
+        // const date = new Date(rateInfo.lastRefreshed + 'Z'); 
+        // newRow.querySelector('[data-refresh]').textContent = date.toLocaleTimeString('es-ES', { 
+        //     hour: '2-digit', 
+        //     minute: '2-digit', 
+        //     day: '2-digit', 
+        //     month: 'short' 
+        // });
+
+        tableBody.appendChild(newRow);
+    });
+}
+
+document.addEventListener('DOMContentLoaded', displayCurrencyRates);
 
 
 // const exchangeRateManager = (() => {
 //     const LOCAL_STORAGE_KEY_EXCHANGE_RATES = 'exchangeRates';
 //     const API_KEY = "cur_live_ISPKqJqmEs3r0AgsNtMTKhrXqhy0XlaEnZ00S11X";
 //     const BASE_CURRENCY = 'USD';
-//     const TARGET_CURRENCIES = ['EUR', 'CAD', 'GBP', 'JPY', 'AUD', 'COP', 'CNY', 'INR', 'MXN', 'BRL', 'ARS', 'CLP'];
+//     const TARGET_CURRENCIES = ["COP", "CAD", "EUR", "JPY", "GBP", "CHF", "CNY", "HKD", "SGD", "MXN"];
 
 //     // Gets the current date in 'YYYY-MM-DD' format.
 //     function getCurrentDateFormatted() {
@@ -224,7 +263,7 @@ async function collectExchangeRates() {
 //     const ratesData = await exchangeRateManager.getExchangeRates();
 
 //     if (ratesData) {
-//         console.log('Tasas de cambio obtenidas para renderizar:', ratesData);
+//         console.log('Currencies to render:', ratesData);
 //         renderExchangeRates(ratesData);
 //     } else {
 //         displayMessage('Data charge error: Verify connection and API connection', true);
