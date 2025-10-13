@@ -1,177 +1,182 @@
-[
-  {
-    "rank": 1,
-    "name": "Elon Musk",
-    "source_of_wealth": "Tesla, SpaceX",
-    "net_worth": "$487.3 B",
-    "daily_change": "+$3.2 B (0.65%)"
-  },
-  {
-    "rank": 2,
-    "name": "Larry Ellison",
-    "source_of_wealth": "Oracle",
-    "net_worth": "$349.4 B",
-    "daily_change": "+$5 B (1.45%)"
-  },
-  {
-    "rank": 3,
-    "name": "Mark Zuckerberg",
-    "source_of_wealth": "Facebook",
-    "net_worth": "$245.9 B",
-    "daily_change": "+$1.6 B (0.66%)"
-  },
-  {
-    "rank": 4,
-    "name": "Jeff Bezos",
-    "source_of_wealth": "Amazon",
-    "net_worth": "$237.5 B",
-    "daily_change": "+$3 B (1.30%)"
-  },
-  {
-    "rank": 5,
-    "name": "Larry Page",
-    "source_of_wealth": "Google",
-    "net_worth": "$203.6 B",
-    "daily_change": "-$1.1 B (-0.54%)"
-  },
-  {
-    "rank": 6,
-    "name": "Sergey Brin",
-    "source_of_wealth": "Google",
-    "net_worth": "$188.9 B",
-    "daily_change": "-$1 B (-0.53%)"
-  },
-  {
-    "rank": 7,
-    "name": "Bernard Arnault & family",
-    "source_of_wealth": "LVMH",
-    "net_worth": "$174.0 B",
-    "daily_change": "+$4.4 B (2.61%)"
-  },
-  {
-    "rank": 8,
-    "name": "Jensen Huang",
-    "source_of_wealth": "Semiconductors",
-    "net_worth": "$164.2 B",
-    "daily_change": "+$3.5 B (2.17%)"
-  },
-  {
-    "rank": 9,
-    "name": "Steve Ballmer",
-    "source_of_wealth": "Microsoft",
-    "net_worth": "$157.7 B",
-    "daily_change": "+$220 M (0.14%)"
-  },
-  {
-    "rank": 10,
-    "name": "Michael Dell",
-    "source_of_wealth": "Dell Technologies",
-    "net_worth": "$150.7 B",
-    "daily_change": "+$5.9 B (4.06%)"
-  },
-  {
-    "rank": 11,
-    "name": "Warren Buffett",
-    "source_of_wealth": "Berkshire Hathaway",
-    "net_worth": "$149.3 B",
-    "daily_change": "-$776 M (-0.52%)"
-  },
-  {
-    "rank": 12,
-    "name": "Amancio Ortega",
-    "source_of_wealth": "Zara",
-    "net_worth": "$127.1 B",
-    "daily_change": "-$1.5 B (-1.14%)"
-  },
-  {
-    "rank": 13,
-    "name": "Rob Walton & family",
-    "source_of_wealth": "Walmart",
-    "net_worth": "$123.1 B",
-    "daily_change": "-$312 M (-0.25%)"
-  },
-  {
-    "rank": 14,
-    "name": "Jim Walton & family",
-    "source_of_wealth": "Walmart",
-    "net_worth": "$120.4 B",
-    "daily_change": "-$311 M (-0.26%)"
-  },
-  {
-    "rank": 15,
-    "name": "Alice Walton",
-    "source_of_wealth": "Walmart",
-    "net_worth": "$111.8 B",
-    "daily_change": "-$304 M (-0.27%)"
-  },
-  {
-    "rank": 16,
-    "name": "Michael Bloomberg",
-    "source_of_wealth": "Bloomberg LP",
-    "net_worth": "$109.4 B",
-    "daily_change": "$0"
-  },
-  {
-    "rank": 17,
-    "name": "Bill Gates",
-    "source_of_wealth": "Microsoft",
-    "net_worth": "$106.5 B",
-    "daily_change": "+$527 M (0.50%)"
-  },
-  {
-    "rank": 18,
-    "name": "Carlos Slim Helu & family",
-    "source_of_wealth": "Telecom",
-    "net_worth": "$104.3 B",
-    "daily_change": "+$549 M (0.53%)"
-  },
-  {
-    "rank": 19,
-    "name": "Mukesh Ambani",
-    "source_of_wealth": "Diversified",
-    "net_worth": "$101.5 B",
-    "daily_change": "-$1.3 B (-1.27%)"
-  },
-  {
-    "rank": 20,
-    "name": "Changpeng Zhao",
-    "source_of_wealth": "Cryptocurrency exchange",
-    "net_worth": "$94.8 B",
-    "daily_change": "$0M (0.00%)"
-  },
-  {
-    "rank": 21,
-    "name": "Francoise Bettencourt Meyers & family",
-    "source_of_wealth": "L'Oréal",
-    "net_worth": "$92.7 B",
-    "daily_change": "+$834 M (0.91%)"
-  },
-  {
-    "rank": 22,
-    "name": "Thomas Peterffy",
-    "source_of_wealth": "Discount brokerage",
-    "net_worth": "$83.9 B",
-    "daily_change": "+$2.9 B (3.62%)"
-  },
-  {
-    "rank": 23,
-    "name": "Julia Koch & family",
-    "source_of_wealth": "Koch, Inc.",
-    "net_worth": "$81.2 B",
-    "daily_change": "$0"
-  },
-  {
-    "rank": 24,
-    "name": "Zhong Shanshan",
-    "source_of_wealth": "Beverages, pharmaceuticals",
-    "net_worth": "$76.8 B",
-    "daily_change": "-$304 M (-0.39%)"
-  },
-  {
-    "rank": 25,
-    "name": "Charles Koch & family",
-    "source_of_wealth": "Koch, Inc.",
-    "net_worth": "$73.8 B",
-    "daily_change": "$0"
+{
+  "year": "2025",
+    "month": "Sep",
+    "source": "https://www.forbes.com/real-time-billionaires/#3593175f3d78",
+    "ranking" :[
+      {
+        "rank": 1,
+        "name": "Elon Musk",
+        "source_of_wealth": "Tesla, SpaceX",
+        "net_worth": "$487.3 B",
+        "daily_change": "+$3.2 B (0.65%)"
+      },
+      {
+        "rank": 2,
+        "name": "Larry Ellison",
+        "source_of_wealth": "Oracle",
+        "net_worth": "$349.4 B",
+        "daily_change": "+$5 B (1.45%)"
+      },
+      {
+        "rank": 3,
+        "name": "Mark Zuckerberg",
+        "source_of_wealth": "Facebook",
+        "net_worth": "$245.9 B",
+        "daily_change": "+$1.6 B (0.66%)"
+      },
+      {
+        "rank": 4,
+        "name": "Jeff Bezos",
+        "source_of_wealth": "Amazon",
+        "net_worth": "$237.5 B",
+        "daily_change": "+$3 B (1.30%)"
+      },
+      {
+        "rank": 5,
+        "name": "Larry Page",
+        "source_of_wealth": "Google",
+        "net_worth": "$203.6 B",
+        "daily_change": "-$1.1 B (-0.54%)"
+      },
+      {
+        "rank": 6,
+        "name": "Sergey Brin",
+        "source_of_wealth": "Google",
+        "net_worth": "$188.9 B",
+        "daily_change": "-$1 B (-0.53%)"
+      },
+      {
+        "rank": 7,
+        "name": "Bernard Arnault & family",
+        "source_of_wealth": "LVMH",
+        "net_worth": "$174.0 B",
+        "daily_change": "+$4.4 B (2.61%)"
+      },
+      {
+        "rank": 8,
+        "name": "Jensen Huang",
+        "source_of_wealth": "Semiconductors",
+        "net_worth": "$164.2 B",
+        "daily_change": "+$3.5 B (2.17%)"
+      },
+      {
+        "rank": 9,
+        "name": "Steve Ballmer",
+        "source_of_wealth": "Microsoft",
+        "net_worth": "$157.7 B",
+        "daily_change": "+$220 M (0.14%)"
+      },
+      {
+        "rank": 10,
+        "name": "Michael Dell",
+        "source_of_wealth": "Dell Technologies",
+        "net_worth": "$150.7 B",
+        "daily_change": "+$5.9 B (4.06%)"
+      },
+      {
+        "rank": 11,
+        "name": "Warren Buffett",
+        "source_of_wealth": "Berkshire Hathaway",
+        "net_worth": "$149.3 B",
+        "daily_change": "-$776 M (-0.52%)"
+      },
+      {
+        "rank": 12,
+        "name": "Amancio Ortega",
+        "source_of_wealth": "Zara",
+        "net_worth": "$127.1 B",
+        "daily_change": "-$1.5 B (-1.14%)"
+      },
+      {
+        "rank": 13,
+        "name": "Rob Walton & family",
+        "source_of_wealth": "Walmart",
+        "net_worth": "$123.1 B",
+        "daily_change": "-$312 M (-0.25%)"
+      },
+      {
+        "rank": 14,
+        "name": "Jim Walton & family",
+        "source_of_wealth": "Walmart",
+        "net_worth": "$120.4 B",
+        "daily_change": "-$311 M (-0.26%)"
+      },
+      {
+        "rank": 15,
+        "name": "Alice Walton",
+        "source_of_wealth": "Walmart",
+        "net_worth": "$111.8 B",
+        "daily_change": "-$304 M (-0.27%)"
+      },
+      {
+        "rank": 16,
+        "name": "Michael Bloomberg",
+        "source_of_wealth": "Bloomberg LP",
+        "net_worth": "$109.4 B",
+        "daily_change": "$0"
+      },
+      {
+        "rank": 17,
+        "name": "Bill Gates",
+        "source_of_wealth": "Microsoft",
+        "net_worth": "$106.5 B",
+        "daily_change": "+$527 M (0.50%)"
+      },
+      {
+        "rank": 18,
+        "name": "Carlos Slim Helu & family",
+        "source_of_wealth": "Telecom",
+        "net_worth": "$104.3 B",
+        "daily_change": "+$549 M (0.53%)"
+      },
+      {
+        "rank": 19,
+        "name": "Mukesh Ambani",
+        "source_of_wealth": "Diversified",
+        "net_worth": "$101.5 B",
+        "daily_change": "-$1.3 B (-1.27%)"
+      },
+      {
+        "rank": 20,
+        "name": "Changpeng Zhao",
+        "source_of_wealth": "Cryptocurrency exchange",
+        "net_worth": "$94.8 B",
+        "daily_change": "$0M (0.00%)"
+      },
+      {
+        "rank": 21,
+        "name": "Francoise Bettencourt Meyers & family",
+        "source_of_wealth": "L'Oréal",
+        "net_worth": "$92.7 B",
+        "daily_change": "+$834 M (0.91%)"
+      },
+      {
+        "rank": 22,
+        "name": "Thomas Peterffy",
+        "source_of_wealth": "Discount brokerage",
+        "net_worth": "$83.9 B",
+        "daily_change": "+$2.9 B (3.62%)"
+      },
+      {
+        "rank": 23,
+        "name": "Julia Koch & family",
+        "source_of_wealth": "Koch, Inc.",
+        "net_worth": "$81.2 B",
+        "daily_change": "$0"
+      },
+      {
+        "rank": 24,
+        "name": "Zhong Shanshan",
+        "source_of_wealth": "Beverages, pharmaceuticals",
+        "net_worth": "$76.8 B",
+        "daily_change": "-$304 M (-0.39%)"
+      },
+      {
+        "rank": 25,
+        "name": "Charles Koch & family",
+        "source_of_wealth": "Koch, Inc.",
+        "net_worth": "$73.8 B",
+        "daily_change": "$0"
+      }
+    ]
   }
-]

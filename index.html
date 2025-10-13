@@ -29,27 +29,26 @@
         </section>
         <!-- richest kist URL https://www.forbes.com/real-time-billionaires/#3593175f3d78 -->
         <section id="news_data">
-            <article id="news">
-                <h2>RELEVANT NEWS</h2>
-                <div class="news_data">
-                    <h3>Title</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In ipsum voluptatibus asperiores. Laudantium iste vel fuga neque dolorum est, officia quos doloremque rerum ex dolores autem! Ipsa minus voluptates suscipit.</p>
-                </div>
-                <div class="news_data">
-                    <h3>Title</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In ipsum voluptatibus asperiores. Laudantium iste vel fuga neque dolorum est, officia quos doloremque rerum ex dolores autem! Ipsa minus voluptates suscipit.</p>
-                </div>
-                <div class="news_data">
-                    <h3>Title</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In ipsum voluptatibus asperiores. Laudantium iste vel fuga neque dolorum est, officia quos doloremque rerum ex dolores autem! Ipsa minus voluptates suscipit.</p>
-                </div>
+            <article id="richest-list"   class="container">
+                <h3>Top 10 Richest People</h3>
+                <p>Data corresponding to: <span id="richest-info"></span></p>
+                <div id="richest-ranking"></div>
             </article>
+            <template id="richest-row-template">
+                <tr>
+                    <td data-field="rank"></td>
+                    <td data-field="name"></td>
+                    <td data-field="company"></td>
+                    <td data-field="net_worth"></td>
+                </tr>
+            </template>
+            
             
             <article  class="container">                
                 <h3>Top 10 Most Valuable Currencies</h3>
                 <p>Data corresponding to: <span id="ranking-info"></span></p>
                 <div id="currency-ranking">
-                    <p>Chargin data...</p>
+                    <!-- <p>Chargin data...</p> -->
                 </div>        
             </article>
 
@@ -64,7 +63,7 @@
         </section>
 
         <section id="nytimes">
-            <h2>NY TIMES TOP STORIES</h2>
+            <h2>Visited News</h2>
             <template id="nynews">
                 <article>
                     <img src="" alt="">

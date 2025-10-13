@@ -8,31 +8,27 @@ const update = checkUpd("lastUpd");
 document.addEventListener('DOMContentLoaded', async () => {
     const container = document.getElementById('currency-ranking');
     const rankingInfoSpan = document.getElementById('ranking-info');
-
-    // row template for the table
+    
     const rowTemplate = document.getElementById('currency-row-template');
 
     try {
-        // JSON data fetching
-        const response = await fetch('./json/rank.json'); // change path from '../json/rank.json' to './json/rank.json' to match the current directory structure
+        
+        const response = await fetch('./json/rank.json'); 
         
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         
-        const data = await response.json(); // Parsear los datos JSON
-
-        // update the ranking info (year and month)
+        const data = await response.json(); 
+        
         if (data.year && data.month) {
             rankingInfoSpan.textContent = `${data.month.toUpperCase()} ${data.year}`;
         }
-
-        // create the table structure
+        
         const table = document.createElement('table');
         const thead = document.createElement('thead');
         const tbody = document.createElement('tbody');
-
-        // theader row creation
+        
         const headerRow = document.createElement('tr');
         ['Rank', 'Currency Name', 'Abrev', 'Value'].forEach(headerText => {
             const th = document.createElement('th');
@@ -41,25 +37,74 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
         thead.appendChild(headerRow);
         table.appendChild(thead);
-
-        // rendering each currency in the ranking
+        
         data.ranking.forEach(currency => {
-            // clone the row template
-            const row = rowTemplate.content.cloneNode(true).firstElementChild;
             
-            // fill the row with currency data
+            const row = rowTemplate.content.cloneNode(true).firstElementChild;            
+            
             row.querySelector('[data-field="Rank"]').textContent = currency.Rank;
             row.querySelector('[data-field="Currency_Name"]').textContent = currency.Currency_Name;
             row.querySelector('[data-field="Abreviation"]').textContent = currency.Abreviation;
             row.querySelector('[data-field="Country"]').textContent = `USD $${currency.value.toFixed(2)}`;
             
-            // Add the row to the tbody
+            tbody.appendChild(row);
+        });
+        table.appendChild(tbody);
+        
+        container.appendChild(table);
+
+    } catch (error) {
+        console.error("Error chargin data:", error);
+        container.innerHTML = `<p style="color: red;">data charge error: ${error.message}. Verify conection and JSON file path.</p>`;
+    }
+});
+
+document.addEventListener('DOMContentLoaded', async () => {
+    const container = document.getElementById('richest-ranking');
+    const rankingInfoSpan = document.getElementById('richest-info');
+    const rowTemplate = document.getElementById('richest-row-template');
+
+    try {
+        const response = await fetch('./json/richest.json'); 
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const data = await response.json(); 
+
+        if (data.year && data.month) {
+            rankingInfoSpan.textContent = `${data.month.toUpperCase()} ${data.year}`;
+        }
+
+        const table = document.createElement('table');
+        const thead = document.createElement('thead');
+        const tbody = document.createElement('tbody');
+
+        const headerRow = document.createElement('tr');
+        ['Rank', 'Name', 'Company', 'Value'].forEach(headerText => {
+            const th = document.createElement('th');
+            th.textContent = headerText;
+            headerRow.appendChild(th);
+        });
+        thead.appendChild(headerRow);
+        table.appendChild(thead);
+
+        console.log(data.ranking.slice(0, 10));
+        data.ranking.slice(0, 10).forEach(item => { 
+
+            const row = rowTemplate.content.cloneNode(true).firstElementChild;
+            
+            row.querySelector('[data-field="rank"]').textContent = item.rank;
+            row.querySelector('[data-field="name"]').textContent = item.name;
+            row.querySelector('[data-field="company"]').textContent = item.source_of_wealth;
+            row.querySelector('[data-field="net_worth"]').textContent = `USD ${item.net_worth}`;
+            
             tbody.appendChild(row);
         });
         table.appendChild(tbody);
 
-        // clear the container and append the table
-        container.innerHTML = ''; // Clear previous content
+        container.innerHTML = ''; 
         container.appendChild(table);
 
     } catch (error) {
