@@ -1,15 +1,58 @@
 import { loadHeaderFooter, checkUpd } from "./utils.mjs";
 
 loadHeaderFooter();
+document.addEventListener('DOMContentLoaded', displayCurrencyRates);
+
+// const amount = document.querySelector("#amount");
+// const output = document.querySelector("#exchange-output");
+
+// amount.addEventListener("input", () => {
+//   const val = parseFloat(amount.value);
+//   console.log( (val * 3920.75).toFixed(2) );
+//   output.value = isNaN(val) ? "Invalid Amount" : (val * 3920.75).toFixed(2);
+// });
 
 const amount = document.querySelector("#amount");
 const output = document.querySelector("#exchange-output");
+const fromInput = document.querySelector("#from");
+const toInput = document.querySelector("#to");
 
-amount.addEventListener("input", () => {
+const rawData = localStorage.getItem("alphaData");
+const rates = rawData ? JSON.parse(rawData) : {};
+console.log(rates);
+
+function convertCurrency() {
+  const from = fromInput.value.trim().toUpperCase();
+  const to = toInput.value.trim().toUpperCase();
   const val = parseFloat(amount.value);
-  console.log( (val * 3920.75).toFixed(2) );
-  output.value = isNaN(val) ? "Invalid Amount" : (val * 3920.75).toFixed(2);
-});
+
+  if (isNaN(val)) {
+    output.value = "Invalid Amount";
+    return;
+  }
+
+  if (from !== "USD") {
+    output.value = "only USD as base";
+    return;
+  }
+
+  const rateData = rates[to];
+
+  if (!rateData) {
+    output.value = "Currencie not available";
+    return;
+  }
+
+  const rate = parseFloat(rateData.rate);
+  const result = (val * rate).toFixed(2);
+  output.value = `${result} ${to}`;
+}
+
+amount.addEventListener("input", convertCurrency);
+// fromInput.addEventListener("input", convertCurrency);
+toInput.addEventListener("input", convertCurrency);
+
+
 
 //  AlphaVantage currency values
 const apiKey = "WHCTJ7KQP17EYN03";
@@ -84,7 +127,7 @@ function displayCurrencyRates() {
     });
 }
 
-document.addEventListener('DOMContentLoaded', displayCurrencyRates);
+
 
 
 // const exchangeRateManager = (() => {
