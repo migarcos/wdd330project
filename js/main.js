@@ -2,6 +2,7 @@ import { loadHeaderFooter, checkUpd } from "./utils.mjs";
 
 loadHeaderFooter();
 
+
 const update = checkUpd("lastUpd");
 
 
@@ -112,6 +113,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         container.innerHTML = `<p style="color: red;">data charge error: ${error.message}. Verify conection and JSON file path.</p>`;
     }
 });
+
+document.querySelector("#richest-list").classList.add("table-zoom", "visible");
 
 // const API_KEY = '979e3f35-d01e-4c27-850f-99f5c3af0ea6';
 

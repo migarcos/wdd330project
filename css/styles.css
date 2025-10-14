@@ -237,7 +237,7 @@ th {
 tr:nth-child(even) {
     background-color: #f2f2f2;
 }
-#alphaData { max-width: 500px;}
+#alphaData { width: 500px; padding: 1rem 2rem;}
 td[data-abrev] { text-align: center;}
 td[data-rate] { text-align: right; }
 
@@ -276,6 +276,11 @@ td[data-rate] { text-align: right; }
         p {  padding-left: 1rem; color: ligth; }
         h3 {  padding: 8px; font-family: "lora"; font-size: medium;}
         img { padding-left: 8px; max-width: 150px; height: 150px;}
+
+        &:hover {
+            box-shadow: 8px 8px 16px rgba(0,0,0,0.1);
+            border: solid 2px var(--accent-color-light);
+        }
     }
 
     /* article {
@@ -351,4 +356,37 @@ input, label, option {
     text-align: right;
     width: 300px;
     margin: 2rem auto;
+}
+
+.table-slide {
+  transform: translateY(30px);
+  opacity: 0;
+  transition: transform 0.6s ease-out, opacity 0.6s ease-out;
+}
+
+.table-slide.visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.table-fade {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.table-fade.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.table-zoom {
+  transform: scale(0.8);
+  opacity: 0;
+  transition: transform 5s ease, opacity 1s ease;
+}
+
+.table-zoom.visible {
+  transform: scale(1);
+  opacity: 1;
 }

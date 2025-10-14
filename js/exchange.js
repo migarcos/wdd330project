@@ -16,6 +16,7 @@ const amount = document.querySelector("#amount");
 const output = document.querySelector("#exchange-output");
 const fromInput = document.querySelector("#from");
 const toInput = document.querySelector("#to");
+const swapBtn = document.getElementById("btnSwap");
 
 const rawData = localStorage.getItem("alphaData");
 const rates = rawData ? JSON.parse(rawData) : {};
@@ -26,32 +27,65 @@ function convertCurrency() {
   const to = toInput.value.trim().toUpperCase();
   const val = parseFloat(amount.value);
 
+  // const validCode = /^[A-Z]{3}$/;
+  // if (!validCode.test(from) || !validCode.test(to)) {
+  //   output.value = "Invalid Code";
+  //   // alert("Currency code invalid");
+  //   return;
+  // }
+
   if (isNaN(val)) {
     output.value = "Invalid Amount";
     return;
   }
 
-  if (from !== "USD") {
-    output.value = "only USD as base";
+  // if (from !== "USD") {
+  //   output.value = "only USD as base";
+  //   return;
+  // }
+
+  if (from === to) {
+    output.value = `${val.toFixed(2)} ${to}`;
     return;
   }
 
-  const rateData = rates[to];
+  // const fromRateData = rates[from];
+  const fromRateData = from === "USD" ? { rate: 1, currency: "US Dollar" } : rates[from];
+  // const toRateData = rates[to];
+  const toRateData = to === "USD" ? { rate: 1, currency: "US Dollar" } : rates[to];
 
-  if (!rateData) {
-    output.value = "Currencie not available";
+
+  // if (!rateData) {
+  //   output.value = "Currencie not available";
+  //   return;
+  // }
+
+  if (!fromRateData || !toRateData) {
+    output.value = "Invalid Currencies";
     return;
   }
 
-  const rate = parseFloat(rateData.rate);
-  const result = (val * rate).toFixed(2);
-  output.value = `${result} ${to}`;
+  const fromRate = parseFloat(fromRateData.rate);
+  const toRate = parseFloat(toRateData.rate);
+
+  let amountInUSD = from === "USD" ? val : val / fromRate;
+
+  const converted = to === "USD" ? amountInUSD : amountInUSD * toRate;
+
+  output.value = `${converted.toFixed(2)} ${to}`;
+
 }
 
 amount.addEventListener("input", convertCurrency);
-// fromInput.addEventListener("input", convertCurrency);
+fromInput.addEventListener("input", convertCurrency);
 toInput.addEventListener("input", convertCurrency);
-
+swapBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  const temp = fromInput.value;
+  fromInput.value = toInput.value;
+  toInput.value = temp;
+  convertCurrency();
+});
 
 
 //  AlphaVantage currency values
