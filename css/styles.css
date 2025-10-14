@@ -276,10 +276,15 @@ td[data-rate] { text-align: right; }
         p {  padding-left: 1rem; color: ligth; }
         h3 {  padding: 8px; font-family: "lora"; font-size: medium;}
         img { padding-left: 8px; max-width: 150px; height: 150px;}
+        transform-style: preserve-3d;
+        transition: transform 0.8s ease-in-out;
+
 
         &:hover {
             box-shadow: 8px 8px 16px rgba(0,0,0,0.1);
             border: solid 2px var(--accent-color-light);
+            /* transform: rotate(360deg); */
+            transform: rotateY(360deg);
         }
     }
 
@@ -389,4 +394,37 @@ input, label, option {
 .table-zoom.visible {
   transform: scale(1);
   opacity: 1;
+}
+
+
+/* section animation */
+.section-animate {
+  opacity: 0;
+  transform: translateY(20px) scale(0.98);
+  transition: opacity 3s ease, transform 8s ease;
+}
+.section-animate.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* to animate currencies exchange */
+.slide-in-right {
+  opacity: 0;
+  transform: translateX(200px);
+  transition: transform 3s ease-out, opacity 4s ease-out;
+}
+.slide-in-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.slide-in-left {
+  opacity: 0;
+  transform: translateX(-200px);
+  transition: transform 3s ease-out, opacity 4s ease-out;
+}
+.slide-in-left.visible {
+  opacity: 1;
+  transform: translateX(0);
 }

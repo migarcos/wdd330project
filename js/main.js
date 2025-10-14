@@ -116,6 +116,18 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 document.querySelector("#richest-list").classList.add("table-zoom", "visible");
 
+function animateSection(sectionId) {
+  const section = document.querySelector(sectionId);
+  section.classList.add("section-animate");
+  requestAnimationFrame(() => {
+    section.classList.add("visible");
+  });
+}
+
+animateSection("#richest-ranking");
+animateSection("#currency-data");
+
+
 // const API_KEY = '979e3f35-d01e-4c27-850f-99f5c3af0ea6';
 
 // async function getGuardianData() {

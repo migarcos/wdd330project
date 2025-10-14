@@ -161,6 +161,14 @@ function displayCurrencyRates() {
     });
 }
 
+// table animation
+const alphaSection = document.getElementById("alphaData");
+const calcSection = document.getElementById("exchange-form");
+alphaSection.classList.add("slide-in-right");
+requestAnimationFrame(() => {
+  alphaSection.classList.add("visible");
+  calcSection.classList.add("visible");
+});
 
 
 
