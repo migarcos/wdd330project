@@ -471,4 +471,9 @@ input, label, option {
         input { font-size: 1.5rem;}
     }
     #alphaData {width: 395px;}
+
+    #footer_up {
+        height: auto;
+        p {display: grid; grid-template-columns: 1fr; padding: 1rem;}
+    } 
 }
