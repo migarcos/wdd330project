@@ -241,7 +241,7 @@ tr:nth-child(even) {
 td[data-abrev] { text-align: center;}
 td[data-rate] { text-align: right; }
 
-#news_data { display: flex; flex-wrap: wrap; border: solid red; justify-content: space-around; margin: 2rem 0;}
+#news_data { display: flex; flex-wrap: wrap; border: solid var(--accent-color-lightest); justify-content: space-around; margin: 2rem 0; border-radius: 1rem;}
 #news {  border: #0F3E49 solid 1px; max-width: 600px; padding: 2rem;}
 .news_data { margin-bottom:2rem;}
 
@@ -304,7 +304,7 @@ td[data-rate] { text-align: right; }
 
 #newscontent {
     display: grid;
-    grid-template: 50px 100px 450px 1fr / 1fr;
+    grid-template: 50px auto 450px 1fr / 1fr;
     max-width: 700px;
     margin: 0 auto;
     img { margin: auto auto;}
@@ -339,9 +339,13 @@ footer span { font-family: Lora;}
 
 #exchange-form {
     width: 432px;
+    
+    h2 {text-align: center;}
 }
 #form-exchange {
     width: 400px;
+
+    legend { margin: 0 1.2rem; padding: 0 1rem;}
 }
 fieldset { margin: 1rem;}
 input, label, option {
@@ -400,8 +404,8 @@ input, label, option {
 /* section animation */
 .section-animate {
   opacity: 0;
-  transform: translateY(20px) scale(0.98);
-  transition: opacity 3s ease, transform 8s ease;
+  transform: translateY(200px) scale(0.8);
+  transition: opacity 3s ease, transform 4s ease;
 }
 .section-animate.visible {
   opacity: 1;

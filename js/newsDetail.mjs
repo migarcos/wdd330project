@@ -7,8 +7,10 @@ export default class NewsDetail {
 
     ini() {
         const news = JSON.parse(localStorage.getItem(this.media));
-        console.log(news[this.order][2]);
+        // console.log(news[this.order][2]);
         this.displayNew(news[this.order]);
+        // console.log(news[this.order])
+        // localStorage.setItem("visited", JSON.stringify(news[this.order]));
     }
 
     displayNew(element) {

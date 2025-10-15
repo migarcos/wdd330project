@@ -27,12 +27,12 @@ function convertCurrency() {
   const to = toInput.value.trim().toUpperCase();
   const val = parseFloat(amount.value);
 
-  // const validCode = /^[A-Z]{3}$/;
-  // if (!validCode.test(from) || !validCode.test(to)) {
-  //   output.value = "Invalid Code";
-  //   // alert("Currency code invalid");
-  //   return;
-  // }
+  const validCode = /^[A-Z]{3}$/;
+  if (!validCode.test(from) || !validCode.test(to)) {
+    output.value = "Invalid Code";
+    // alert("Currency code invalid");
+    return;
+  }
 
   if (isNaN(val)) {
     output.value = "Invalid Amount";
@@ -161,10 +161,10 @@ function displayCurrencyRates() {
     });
 }
 
-// table animation
+// Sections  animation
 const alphaSection = document.getElementById("alphaData");
 const calcSection = document.getElementById("exchange-form");
-alphaSection.classList.add("slide-in-right");
+
 requestAnimationFrame(() => {
   alphaSection.classList.add("visible");
   calcSection.classList.add("visible");
